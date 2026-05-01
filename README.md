@@ -2,6 +2,12 @@
 
 A modern, full-stack MERN (MongoDB, Express, React, Node.js) application for managing team projects and tasks with role-based access control.
 
+## 🔗 Live Demo
+
+- **Frontend**: [https://ethara-frontend.netlify.app/](https://ethara-frontend.netlify.app/)
+- **Backend API**: [https://etharaaiassignment-production-a16e.up.railway.app](https://etharaaiassignment-production-a16e.up.railway.app)
+
+
 ## 🚀 Features
 
 - **Authentication & Authorization**: Secure signup/login using JWT and bcrypt password hashing.
