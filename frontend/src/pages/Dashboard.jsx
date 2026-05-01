@@ -12,7 +12,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const { data } = await api.get('/tasks');
+        const { data } = await api.get('/api/tasks');
         setTasks(data);
         setLoading(false);
       } catch (err) {

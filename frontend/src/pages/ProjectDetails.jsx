@@ -26,8 +26,8 @@ const ProjectDetails = () => {
     const fetchProjectAndTasks = async () => {
       try {
         const [projRes, tasksRes] = await Promise.all([
-          api.get(`/projects/${id}`),
-          api.get(`/tasks?projectId=${id}`),
+          api.get(`/api/projects/${id}`),
+          api.get(`/api/tasks?projectId=${id}`),
         ]);
         setProject(projRes.data);
         setTasks(tasksRes.data);
@@ -44,7 +44,7 @@ const ProjectDetails = () => {
     e.preventDefault();
     try {
       if (isEditing) {
-        const { data } = await api.put(`/tasks/${editingTaskId}`, {
+        const { data } = await api.put(`/api/tasks/${editingTaskId}`, {
           title: newTaskTitle,
           description: newTaskDesc,
           dueDate: newTaskDueDate || undefined,
@@ -52,7 +52,7 @@ const ProjectDetails = () => {
         });
         setTasks(tasks.map(t => t._id === editingTaskId ? data : t));
       } else {
-        const { data } = await api.post('/tasks', {
+        const { data } = await api.post('/api/tasks', {
           title: newTaskTitle,
           description: newTaskDesc,
           dueDate: newTaskDueDate || undefined,
@@ -69,7 +69,7 @@ const ProjectDetails = () => {
 
   const updateTaskStatus = async (taskId, newStatus) => {
     try {
-      const { data } = await api.put(`/tasks/${taskId}`, { status: newStatus });
+      const { data } = await api.put(`/api/tasks/${taskId}`, { status: newStatus });
       setTasks(tasks.map(t => t._id === taskId ? { ...t, status: data.status } : t));
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to update status');
@@ -79,7 +79,7 @@ const ProjectDetails = () => {
   const handleDeleteTask = async (taskId) => {
     if (!window.confirm('Are you sure you want to delete this task?')) return;
     try {
-      await api.delete(`/tasks/${taskId}`);
+      await api.delete(`/api/tasks/${taskId}`);
       setTasks(tasks.filter(t => t._id !== taskId));
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete task');
@@ -89,7 +89,7 @@ const ProjectDetails = () => {
   const handleDeleteProject = async () => {
     if (!window.confirm('Are you sure you want to delete this ENTIRE project? This action cannot be undone.')) return;
     try {
-      await api.delete(`/projects/${id}`);
+      await api.delete(`/api/projects/${id}`);
       navigate('/projects');
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete project');

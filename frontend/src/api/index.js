@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://etharaaiassignment-production-a16e.up.railway.app/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://etharaaiassignment-production-a16e.up.railway.app',
 });
 
 api.interceptors.request.use((config) => {

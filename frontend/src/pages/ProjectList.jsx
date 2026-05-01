@@ -21,8 +21,8 @@ const ProjectList = () => {
     const fetchData = async () => {
       try {
         const [projRes, usersRes] = await Promise.all([
-          api.get('/projects'),
-          user.role === 'Admin' ? api.get('/auth/users') : Promise.resolve({ data: [] })
+          api.get('/api/projects'),
+          user.role === 'Admin' ? api.get('/api/auth/users') : Promise.resolve({ data: [] })
         ]);
         setProjects(projRes.data);
         if (user.role === 'Admin') {
@@ -40,7 +40,7 @@ const ProjectList = () => {
   const handleCreateProject = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await api.post('/projects', {
+      const { data } = await api.post('/api/projects', {
         name: newProjectName,
         description: newProjectDesc,
         members: selectedMembers,
